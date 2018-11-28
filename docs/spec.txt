@@ -1,0 +1,55 @@
+CSC 337 Final Project Proposal
+Name: Jon Thomas
+CSC-337
+
+For my final project, I'd like to do a demonstration of RSA encryption.  The
+webpage would showcase key generation, encryption, decryption, and attempts
+at hacking.  The layout of the page would be as such:
+
+BOB: At the top is BOB's information.  He has three input fields:
+    1) p, a prime number >= 2.  User can input or have one generated.
+    2) q, another prime number >= 2.  Same as above.
+    3) e, a chosen exponent with the property GCD(e, (p-1)(q-1)) = 1.
+       Can also have this generated.
+
+    Bob will then generate a number n = pq, phi(n) = (p-1)(q-1),
+    and d = e^-1 (mod phi(n)).
+
+ALICE: Alice will have three fields as well, the same as Bob.
+
+Bob and Alice then generate their respective public and private keys, which are
+displayed on the page (for illustration purposes).  Alice and Bob also both
+have a message box that allows them to enter a message and encrypt/decrypt it.  
+They can also request each other's public keys, which will be "transmitted" 
+across.
+
+In the middle of the page sits Eve.  Whenever traffic is sent back and forth
+between Alice and Box, Eve "intercepts" it, and will attempt to read the
+message.  Users can click a button near Eve to try and hack the messages sent
+back and forth.  Since Eve knows the public keys, her goal is to find d for
+either party so she can read the messages sent back and forth.
+
+Effectively, a user can generate keys and messages, and transmit them back and 
+forth between two people in a program.
+
+FRONT END JAVASCRIPT
+
+Aside from obvious stuff like event handlers, most of the "message transmission"
+will be done via front-end JavaScript.  That is, when Alice send a message to
+Bob, that will be done by just updating variables in JavaScript.  Eve's
+interceptions will also be done via JavaScript.
+
+BACK END JAVASCRIPT
+
+The server will serve as a "Do math for me" box that Alice, Bob, and Eve all
+use.  If Alice and Bob want to generate random primes, they can request them
+from the server.  If Alice, Bob, or Eve want to use a key to encrypt or decrypt
+a message, they can send the message and key to the server to do.  If Eve wants
+to try and factor a number, she could send that number to the server and have
+it factor it for her. 
+
+DATABASE
+
+I'm not sure if there is a need for a database in this project.  I could store
+public keys in a database, and have public key requests done through a database
+query, but it seems trivial.  Any suggestions would be appreciated.
