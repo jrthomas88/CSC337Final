@@ -18,8 +18,185 @@
 <head>
     <meta charset="UTF-8">
     <title>RSApp: RSA Encryption Demonstration</title>
+    <link rel="stylesheet" href="RSApp.css">
+    <script src="RSApp.js"></script>
 </head>
 <body>
 
+<div id="banner">
+    <h1>RSApp: RSA Encryption Demonstration</h1>
+    <p>
+        A demonstration of the RSA public-key cryptosystem.
+    </p>
+</div>
+
+<div id="flexBoxContainer">
+
+    <!-- Section for Alice -->
+
+    <div id="alice">
+
+        <h2>Alice</h2>
+
+        <!-- Generate Key for Alice -->
+        <label>
+            Select prime number <em>p</em>:
+            <input type="text" class="primeP" id="aliceP">
+        </label>
+
+        <br/>
+
+        <label>
+            Select prime number <em>q</em>:
+            <input type="text" class="primeQ" id="aliceQ">
+        </label>
+
+        <br/>
+
+        <label>
+            Select exponent <em>e</em>:
+            <input type="text" class="expE" id="aliceE">
+        </label>
+
+        <br/>
+
+        <button id="getPrimeA">Generate Values</button>
+        <button id="makeKeyA">Generate Public/Private Key</button>
+
+        <!-- Generate Key -->
+        <br />
+        <strong><span>Step 1: Compute <em>n = pq</em>: </span></strong>
+        <span id="aliceN">N/A</span>
+        <br />
+        <strong><span>Step 2: Compute <em>&phi;(n) = (p-1)(q-1)</em>: </span></strong>
+        <span id="alicePhi">N/A</span>
+        <br />
+        <strong><span>Step 3: Compute <em>d = e<sup>-1</sup> mod &phi;(n)</em>:
+        </span></strong>
+        <span id="aliceD">N/A</span>
+        <br />
+
+        <!-- Alice's Key info -->
+
+        <h3>Public Key:</h3>
+        <p id="alicePubKey">N/A</p>
+
+        <h3>Private Key:</h3>
+        <p id="alicePrivKey">N/A</p>
+
+        <!-- Alice's Message Info -->
+        <label for="aliceMessage">
+            Alice's Message Box
+        </label>
+        <textarea class="messageBox" id="aliceMessage"></textarea>
+
+        <br/>
+        <button id="aliceEnc">Encrypt Message</button>
+        <button id="aliceDec">Decrypt Message</button>
+        <button id="aliceSend">Send Message</button>
+    </div>
+
+    <!-- Eve's Box -->
+
+    <div id="eavesdrop">
+
+        <h2>Eve</h2>
+
+        <div id="eveKeyBox">
+            <div>
+                <h3>Alice's Key: </h3>
+                <p id="eveAPub">Public Key: </p>
+                <p id="eveAPriv">Private Key: </p>
+                <button id="evePublicA">Get Public Key</button>
+                <button id="getAlice">Crack Key</button>
+            </div>
+            <div>
+                <h3>Bob's Key: </h3>
+                <p id="eveBPub">Public Key: </p>
+                <p id="eveBPriv">Private Key: </p>
+                <button id="evePublicB">Get Public Key</button>
+                <button id="getBob">Crack Key</button>
+            </div>
+        </div>
+
+        <div id="eveMessageList">
+            <h3>Intercepted Messages: </h3>
+        </div>
+
+        <button id="eveCrack">
+            Decrypt Messages
+        </button>
+
+    </div>
+
+    <!-- Section for Bob -->
+
+    <div id="bob">
+        <h2>Bob</h2>
+
+        <!-- Generate Key for Alice -->
+        <label>
+            Select prime number <em>p</em>:
+            <input type="text" class="primeP" id="bobP">
+        </label>
+
+        <br/>
+
+        <label>
+            Select prime number <em>q</em>:
+            <input type="text" class="primeQ" id="bobQ">
+        </label>
+
+        <br/>
+
+        <label>
+            Select exponent <em>e</em>:
+            <input type="text" class="expE" id="bobE">
+        </label>
+
+        <br/>
+
+        <button id="getPrimeB">Generate Values</button>
+        <button id="makeKeyB">Generate Public/Private Key</button>
+
+        <!-- Generate Key -->
+        <br />
+        <strong><span>Step 1: Compute <em>n = pq</em>: </span></strong>
+        <span id="bobN">N/A</span>
+        <br />
+        <strong><span>Step 2: Compute <em>&phi;(n) = (p-1)(q-1)</em>: </span></strong>
+        <span id="bobPhi">N/A</span>
+        <br />
+        <strong><span>Step 3: Compute <em>d = e<sup>-1</sup> mod &phi;(n)</em>:
+        </span></strong>
+        <span id="bobD">N/A</span>
+        <br />
+
+        <!-- Bob's Key info -->
+
+        <h3>Public Key:</h3>
+        <p id="bobPubKey">N/A</p>
+
+        <h3>Private Key:</h3>
+        <p id="bobPrivKey">N/A</p>
+
+        <!-- Bob's Message Info -->
+        <label for="bobMessage">
+            Bob's Message Box
+        </label>
+        <textarea class="messageBox" id="bobMessage"></textarea>
+
+        <br/>
+        <button id="bobEnc">Encrypt Message</button>
+        <button id="bobDec">Decrypt Message</button>
+        <button id="bobSend">Send Message</button>
+
+    </div>
+</div>
+
+<div id="footer">
+    <p>Jon Thomas</p>
+    <p>CSC-337 Fall 2018</p>
+</div>
 </body>
 </html>
