@@ -64,17 +64,17 @@
         <button id="makeKeyA">Generate Public/Private Key</button>
 
         <!-- Generate Key -->
-        <br />
+        <br/>
         <strong><span>Step 1: Compute <em>n = pq</em>: </span></strong>
         <span id="aliceN">N/A</span>
-        <br />
+        <br/>
         <strong><span>Step 2: Compute <em>&phi;(n) = (p-1)(q-1)</em>: </span></strong>
         <span id="alicePhi">N/A</span>
-        <br />
+        <br/>
         <strong><span>Step 3: Compute <em>d = e<sup>-1</sup> mod &phi;(n)</em>:
         </span></strong>
         <span id="aliceD">N/A</span>
-        <br />
+        <br/>
 
         <!-- Alice's Key info -->
 
@@ -121,6 +121,12 @@
 
         <div id="eveMessageList">
             <h3>Intercepted Messages: </h3>
+            <table id="eveTable">
+                <tr>
+                    <th>Recipient</th>
+                    <th>Message</th>
+                </tr>
+            </table>
         </div>
 
         <button id="eveCrack">
@@ -160,17 +166,17 @@
         <button id="makeKeyB">Generate Public/Private Key</button>
 
         <!-- Generate Key -->
-        <br />
+        <br/>
         <strong><span>Step 1: Compute <em>n = pq</em>: </span></strong>
         <span id="bobN">N/A</span>
-        <br />
+        <br/>
         <strong><span>Step 2: Compute <em>&phi;(n) = (p-1)(q-1)</em>: </span></strong>
         <span id="bobPhi">N/A</span>
-        <br />
+        <br/>
         <strong><span>Step 3: Compute <em>d = e<sup>-1</sup> mod &phi;(n)</em>:
         </span></strong>
         <span id="bobD">N/A</span>
-        <br />
+        <br/>
 
         <!-- Bob's Key info -->
 

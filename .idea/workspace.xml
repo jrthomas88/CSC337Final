@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90426069-c865-48ba-ac43-26f1f3da0046" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/back-end/RSApp_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/back-end/RSApp_service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front-end/RSApp.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/front-end/RSApp.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front-end/RSApp.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/front-end/RSApp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/front-end/RSApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/front-end/RSApp.js" afterDir="false" />
@@ -19,53 +21,51 @@
     <session id="257813523">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
           <entry key="html" value="1" />
-          <entry key="js" value="2" />
+          <entry key="js" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="2" />
+          <entry key="JavaScript" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="641" />
-          <entry key="html" value="2171" />
-          <entry key="js" value="4562" />
+          <entry key="css" value="663" />
+          <entry key="html" value="2261" />
+          <entry key="js" value="13905" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="641" />
-          <entry key="HTML" value="2171" />
-          <entry key="JavaScript" value="4562" />
+          <entry key="CSS" value="663" />
+          <entry key="HTML" value="2261" />
+          <entry key="JavaScript" value="13905" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="108" column="45" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
-              <folding>
-                <element signature="e#1736#1741#1" expanded="true" />
-                <element signature="e#1909#1914#0" expanded="true" />
-                <element signature="e#4212#4217#0" expanded="true" />
-                <element signature="e#4491#4496#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1361">
+              <caret line="127" column="21" selection-start-line="127" selection-start-column="21" selection-end-line="127" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -73,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+            <state relative-caret-position="735">
+              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -82,17 +82,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3600">
-              <caret line="240" column="46" selection-start-line="240" selection-start-column="46" selection-end-line="240" selection-end-column="46" />
+            <state relative-caret-position="396">
+              <caret line="327" column="43" selection-start-line="327" selection-start-column="43" selection-end-line="327" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/back-end/RSApp_service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+            <state relative-caret-position="138">
+              <caret line="219" column="1" lean-forward="true" selection-start-line="207" selection-start-column="14" selection-end-line="219" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -108,16 +108,21 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>listen</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/back-end/RSApp_service.js" />
         <option value="$PROJECT_DIR$/src/front-end/RSApp.css" />
-        <option value="$PROJECT_DIR$/src/front-end/RSApp.js" />
         <option value="$PROJECT_DIR$/src/front-end/RSApp.html" />
+        <option value="$PROJECT_DIR$/src/front-end/RSApp.js" />
+        <option value="$PROJECT_DIR$/src/back-end/RSApp_service.js" />
       </list>
     </option>
   </component>
@@ -126,6 +131,58 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/accepts/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/array-flatten/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/body-parser/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/bytes/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/content-disposition/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/content-type/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/cookie-signature/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/cookie/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/debug/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/depd/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/destroy/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/ee-first/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/encodeurl/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/escape-html/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/etag/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/express/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/finalhandler/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/forwarded/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/fresh/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/http-errors/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/iconv-lite/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/inherits/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/ipaddr.js/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/media-typer/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/merge-descriptors/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/methods/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/mime-db/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/mime-types/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/mime/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/ms/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/negotiator/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/on-finished/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/parseurl/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/path-to-regexp/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/proxy-addr/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/qs/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/range-parser/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/raw-body/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/safe-buffer/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/safer-buffer/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/send/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/serve-static/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/setprototypeof/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/statuses/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/type-is/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/unpipe/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/utils-merge/package.json" />
+      <path value="$PROJECT_DIR$/src/back-end/node_modules/vary/package.json" />
+    </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1920" />
@@ -170,9 +227,11 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="8.10.0" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -196,24 +255,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1543365962030</updated>
-      <workItem from="1543365963179" duration="11487000" />
+      <workItem from="1543365963179" duration="11725000" />
+      <workItem from="1543438707435" duration="246000" />
+      <workItem from="1543439081109" duration="5566000" />
+      <workItem from="1543474709560" duration="488000" />
+      <workItem from="1543622983445" duration="24571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11487000" />
+    <option name="totallyTimeSpent" value="42596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24986821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -221,6 +280,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -233,37 +296,31 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/back-end/RSApp_service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3600">
-          <caret line="240" column="46" selection-start-line="240" selection-start-column="46" selection-end-line="240" selection-end-column="46" />
+        <state relative-caret-position="735">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="108" column="45" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
-          <folding>
-            <element signature="e#1736#1741#1" expanded="true" />
-            <element signature="e#1909#1914#0" expanded="true" />
-            <element signature="e#4212#4217#0" expanded="true" />
-            <element signature="e#4491#4496#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1361">
+          <caret line="127" column="21" selection-start-line="127" selection-start-column="21" selection-end-line="127" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/front-end/RSApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="327" column="43" selection-start-line="327" selection-start-column="43" selection-end-line="327" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/back-end/RSApp_service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="219" column="1" lean-forward="true" selection-start-line="207" selection-start-column="14" selection-end-line="219" selection-end-column="1" />
         </state>
       </provider>
     </entry>

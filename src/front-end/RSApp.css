@@ -46,6 +46,10 @@ button {
     background-color: darkslategrey;
 }
 
+table {
+    width: 100%;
+}
+
 .computeKey {
     display: inline-block;
 }
