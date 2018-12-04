@@ -105,15 +105,19 @@
         <div id="eveKeyBox">
             <div>
                 <h3>Alice's Key: </h3>
-                <p id="eveAPub">Public Key: </p>
-                <p id="eveAPriv">Private Key: </p>
+                <span>Public Key: </span><span id="eveAPub"></span>
+                <br/>
+                <span>Private Key: </span><span id="eveAPriv"></span>
+                <br/>
                 <button id="evePublicA">Get Public Key</button>
                 <button id="getAlice">Crack Key</button>
             </div>
             <div>
                 <h3>Bob's Key: </h3>
-                <p id="eveBPub">Public Key: </p>
-                <p id="eveBPriv">Private Key: </p>
+                <span>Public Key: </span><span id="eveBPub"></span>
+                <br/>
+                <span>Private Key: </span><span id="eveBPriv"></span>
+                <br/>
                 <button id="evePublicB">Get Public Key</button>
                 <button id="getBob">Crack Key</button>
             </div>
@@ -198,6 +202,12 @@
         <button id="bobSend">Send Message</button>
 
     </div>
+</div>
+
+<div id="math">
+    <p>Encryption: M<sup>e</sup> mod n = C</p>
+    <p>Decryption: C<sup>d</sup> mod n = (M<sup>e</sup>)<sup>d</sup> mod n =
+        M<sup>ed</sup> mod n = M<sup>1</sup> mod n = M</p>
 </div>
 
 <div id="footer">

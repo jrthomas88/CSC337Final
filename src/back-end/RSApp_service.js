@@ -7,8 +7,8 @@
  Back-end service for RSApp.  Performs the following services for the
  front-end component:
 
- 1. Retrieves public keys from the MySQL database
- 2. Stores new keys in the MySQL database
+ 1. Retrieves public keys from a key file
+ 2. Stores new keys in key files
  3. Perform encryption using a public key
  4. Perform decryption using a provided private key
  5. Generate prime numbers
@@ -36,9 +36,15 @@ app.use(function (req, res, next) {
 
 app.use(express.static('public'));
 
+/**
+ * app.get
+ * provides two services:
+ * 1. primes: generate the values needed for keygen, namely primes p and q,
+ *    along with encryption exponent e.
+ * 2. key: given a name, provide the public key associated with that user
+ */
 app.get('/', function (req, res) {
         let param = req.query.msg;
-        console.log("Received message: " + param);
         if (!param) {
             param = "";
         }
@@ -60,15 +66,43 @@ app.get('/', function (req, res) {
 
             data["E"] = e;
 
-            console.log("Sending message...");
             res.send(JSON.stringify(data));
+        }
+
+        if (param === "key") {
+            let name = req.query.name;
+            fs.readFile(name + ".key", 'utf8', function (err, contents) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400);
+                        return;
+                    }
+                    contents = contents.split(/\s+/);
+                    let e = contents[0];
+                    let n = contents[1];
+
+                    data["E"] = e;
+                    data["N"] = n;
+                    res.status(200);
+                    res.send(JSON.stringify(data));
+                }
+            );
         }
     }
 );
 
+/**
+ * app.post
+ * provides 5 services:
+ * 1. keygen: user supplies p,q, and e.  Server generates and returns n,
+ *    phi(n), e, and d.
+ * 2. encrypt: user provides a name and a message.  The server obtains the
+ *    public key of that name and encrypts the message using their public key.
+ * 3. decrypt: same as encrypt, uses private key instead.
+ * 4. crack: user provides a public key.  Finds corresponding private key.
+ * 5. read: applies a given key to a given message.
+ */
 app.post('/', jsonParser, function (req, res) {
-
-    console.log("Received post request.");
 
     const reqType = req.body.request;
     let data = {};
@@ -80,14 +114,14 @@ app.post('/', jsonParser, function (req, res) {
         const q = req.body.Q;
         const e = req.body.E;
 
-        console.log("Values are " + p + ", " + q + ", and " + e + ".");
-
         let n = p * q;
         let phiN = (p - 1) * (q - 1);
         let d = inverse(e, phiN);
 
-        console.log("Key vals are n = " + n + ", phi(n) = "
-            + phiN + ", and d = " + d + ".");
+        if (!isPrime(parseInt(p)) || !isPrime(parseInt(q))) {
+            res.status(444);
+            return;
+        }
 
         if (d === -1) {
             res.status(444); // 444 means invalid e value
@@ -114,11 +148,10 @@ app.post('/', jsonParser, function (req, res) {
         });
     }
 
+    // when encrypting a message
     if (reqType === 'encrypt') {
         const name = req.body.name;
         const message = req.body.message;
-
-        console.log("message = " + message);
 
         fs.readFile(name + ".key", 'utf8', function (err, contents) {
                 if (err) {
@@ -131,30 +164,18 @@ app.post('/', jsonParser, function (req, res) {
                 let n = contents[1];
                 let messageNum = numbify(message, n);
 
-                console.log("Message Num:");
-                for (let i = 0; i < messageNum.length; i++) {
-                    console.log("\t" + messageNum[i]);
-                }
-
-                let encrypted = encrypt(messageNum, n, e);
-
-                console.log("encrypted = " + encrypted);
-
-                data["message"] = encrypted;
+                data["message"] = encrypt(messageNum, n, e);
                 res.status(200);
                 res.send(JSON.stringify(data));
             }
         );
     }
 
+    // when decrypting a message
     if (reqType === 'decrypt') {
-
-        console.log("*****DECRYPT*****");
 
         const name = req.body.name;
         const message = req.body.message;
-
-        console.log("message = " + message);
 
         fs.readFile(name + ".key", 'utf8', function (err, contents) {
                 if (err) {
@@ -163,17 +184,12 @@ app.post('/', jsonParser, function (req, res) {
                     return;
                 }
                 contents = contents.split(/\s+/);
-                console.log(contents);
                 let d = contents[2];
                 let n = contents[1];
-
-                console.log("d = " + d + ", n = " + n);
 
                 let messageVal = message.split(" ");
 
                 let encrypted = encrypt(messageVal, n, d);
-
-                console.log("decrypted = " + encrypted);
 
                 let string = "";
                 for (let i = 0; i < encrypted.length; i++) {
@@ -186,8 +202,46 @@ app.post('/', jsonParser, function (req, res) {
             }
         );
     }
+
+    if (reqType === 'crack') {
+        const e = req.body.e;
+        const n = req.body.n;
+
+        let p = findFactor(n);
+        let q = n / p;
+
+        let phiN = (p - 1) * (q - 1);
+        data["D"] = inverse(e, phiN);
+        data["N"] = n;
+        res.status(200);
+        res.send(JSON.stringify(data));
+    }
+
+    if (reqType === 'read') {
+        const message = req.body.message;
+        const n = req.body.n;
+        const d = req.body.d;
+
+        let msgList = message.split(" ");
+        let dec = encrypt(msgList, n, d);
+
+        let string = "";
+        for (let i = 0; i < msgList.length; i++) {
+            string += alphabetize(dec[i]);
+        }
+        data["message"] = string;
+        res.status(200);
+        res.send(JSON.stringify(data));
+    }
 });
 
+/**
+ * alphabetize
+ * takes a number and converts it to a string.  Does so by treating the
+ * alphabet as a base-28 (skips 0 and includes spaces) number system.
+ * @param message the numerical message to translate
+ * @returns {string} the alphabetized message
+ */
 function alphabetize(message) {
     let string = "";
     message = parseInt(message);
@@ -205,13 +259,19 @@ function alphabetize(message) {
     return string;
 }
 
+/**
+ * encrypt
+ * given a list of numbers, use the provided key to encrypt those numbers
+ * @param messageList the list of numbers to encrypt
+ * @param n the modulus of the key
+ * @param e the encryption exponent
+ * @returns {Array} encrypted numbers
+ */
 function encrypt(messageList, n, e) {
     let encryptList = [];
 
     for (let i = 0; i < messageList.length; i++) {
         let m_mod_n = modexp(messageList[i], e, n);
-
-        console.log(messageList[i] + "^" + e + " mod " + n + " = " + m_mod_n);
 
         encryptList.push(m_mod_n);
     }
@@ -219,6 +279,15 @@ function encrypt(messageList, n, e) {
     return encryptList;
 }
 
+/**
+ * modexp
+ * raises a number to a given power, mod some modulus.  Does so using
+ * repeated squaring.
+ * @param m the base value
+ * @param e the exponent
+ * @param n the modulus
+ * @returns {number} the results of m^e mod n
+ */
 function modexp(m, e, n) {
 
     m = parseInt(m);
@@ -230,6 +299,7 @@ function modexp(m, e, n) {
 
     let p = 1;
 
+    // get powers of two
     while (p < e) {
         powers.push(m % n);
         m = (m * m) % n;
@@ -237,25 +307,26 @@ function modexp(m, e, n) {
         p *= 2;
     }
 
-    console.log(exp);
-    console.log(powers);
-
     let answer = 1;
 
+    // break up into products of powers
     for (let i = exp.length - 1; i >= 0; i--) {
         if (exp[i] <= e) {
             answer = (answer * powers[i]) % n;
             e -= exp[i];
-
-            console.log("answer = " + answer);
-            console.log("e = " + e);
         }
     }
 
     return answer;
 }
 
-
+/**
+ * inverse
+ * finds the inverse of a mod n.  If no such inverse exists, returns -1
+ * @param a the original number
+ * @param n the modulus
+ * @returns {number} the inverse of a mod n
+ */
 function inverse(a, n) {
     let t = 0;
     let r = n;
@@ -281,6 +352,13 @@ function inverse(a, n) {
 
 }
 
+/**
+ * gcd
+ * finds the greatest common divisor of a and b.
+ * @param a
+ * @param b
+ * @returns {number} gcd(a,n)
+ */
 function gcd(a, b) {
     a = Math.abs(a);
     b = Math.abs(b);
@@ -297,7 +375,11 @@ function gcd(a, b) {
     }
 }
 
-
+/**
+ * generatePrimes
+ * generates a list of primes.  These primes are then used for key
+ * generation or key cracking.
+ */
 function generatePrimes() {
     primes.push(2);
     let numbers = [];
@@ -315,17 +397,50 @@ function generatePrimes() {
     }
 }
 
+/**
+ * isPrime
+ * returns true if a number is in the list of primes
+ * @param num the nunber in question
+ * @returns {boolean} true if number is prime
+ */
+function isPrime(num) {
+    for (let i = 0; i < primes.length; i++) {
+        if (primes[i] === num) {
+            return true;
+        }
+        if (primes[i] > num) {
+            return false;
+        }
+    }
+    return false
+}
+
+/**
+ * findFactor
+ * finds a prime factor of num.
+ * @param num the number being factored
+ * @returns {number} a prime factor of num
+ */
 function findFactor(num) {
     for (let i = 0; i < primes.length; i++) {
         if (num % primes[i] === 0) {
             return primes[i];
         }
     }
+    return -1;
 }
 
+/**
+ * numbify
+ * converts a string into a number.  Does so by treating the string as a
+ * base-28 encoded number (spaces included, 0 ignored).  Breaks string into
+ * messages < n.
+ * @param message integer
+ * @param n modulus message must be less than
+ * @returns {Array} list of numbers.
+ */
 function numbify(message, n) {
 
-    console.log("Numbify Message: " + message);
     n = parseInt(n);
 
     let number = 0;

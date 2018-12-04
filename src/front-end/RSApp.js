@@ -86,8 +86,6 @@
                 let q = json["Q"];
                 let e = json["E"];
 
-                console.log("Received inputs " + p + ", " + q + ", and " + e + ".");
-
                 document.getElementById(recip + "P").value = p;
                 document.getElementById(recip + "Q").value = q;
                 document.getElementById(recip + "E").value = e;
@@ -193,7 +191,7 @@
 
         if (!validateMessage(message)) {
             alert("Invalid input.  Please use lowercase letters a-z and" +
-                " spaces only.")
+                " spaces only.");
             return;
         }
 
@@ -210,7 +208,7 @@
 
         if (!validateMessage(message)) {
             alert("Invalid input.  Please use lowercase letters a-z and" +
-                " spaces only.")
+                " spaces only.");
             return;
         }
 
@@ -264,6 +262,12 @@
             });
     }
 
+    /**
+     * validateIntegers
+     * validate that the message consists only of integers and spaces
+     * @param message input message
+     * @returns {{groups: {}}|RegExpExecArray} true if validated
+     */
     function validateIntegers(message) {
         let test = /^[0-9 ]{1,240}$/;
         return test.exec(message);
@@ -384,6 +388,12 @@
         addToTable(to, message);
     }
 
+    /**
+     * addToTable
+     * Add the name and message parameters to Eve's intercepted messages table.
+     * @param to the recipient of the message
+     * @param message the message intercepted
+     */
     function addToTable(to, message) {
         let tableRow = document.createElement("tr");
         let dataName = document.createElement("td");
@@ -403,7 +413,20 @@
      * Get Alice's public key for Eve
      */
     function getAliceKey() {
-        alert("Get Alice's Key")
+        let url = "http://localhost:3000?msg=key&name=alice";
+
+        fetch(url)
+            .then(checkStatus)
+            .then(function (responseText) {
+                let json = JSON.parse(responseText);
+                let e = json["E"];
+                let n = json["N"];
+
+                document.getElementById("eveAPub").innerHTML = e + " " + n;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     /**
@@ -411,16 +434,20 @@
      * Get Bob's public key for Eve
      */
     function getBobKey() {
-        alert("Get Bob's Key");
-    }
+        let url = "http://localhost:3000?msg=key&name=bob";
 
-    /**
-     * getKey
-     * Return the public key from the requested target
-     * @param target
-     */
-    function getKey(target) {
-        // TODO get key from requested val
+        fetch(url)
+            .then(checkStatus)
+            .then(function (responseText) {
+                let json = JSON.parse(responseText);
+                let e = json["E"];
+                let n = json["N"];
+
+                document.getElementById("eveBPub").innerHTML = e + " " + n;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     /**
@@ -428,8 +455,9 @@
      * Try to brute force cracking Alice's private key by factoring n.
      */
     function crackAlice() {
-        alert("Crack Alice's Key");
         aliceKey = true;
+        let key = document.getElementById("eveAPub").innerHTML.split(" ");
+        crack(key[0], key[1], "A");
     }
 
     /**
@@ -437,8 +465,9 @@
      * Try to brute force cracking Bob's private key by factoring n.
      */
     function crackBob() {
-        alert("Crack Bob's Key");
         bobKey = true;
+        let key = document.getElementById("eveBPub").innerHTML.split(" ");
+        crack(key[0], key[1], "B");
     }
 
     /**
@@ -446,9 +475,36 @@
      * Given a public key, try to determine the corresponding private key.
      * @param n the number to factor
      * @param e the public key's exponent
+     * @param target which key is being cracked
      */
-    function crack(n, e) {
+    function crack(e, n, target) {
+        const data = {
+            request: "crack",
+            e: e,
+            n: n
+        };
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        let url = "http://localhost:3000";
+        fetch(url, fetchOptions)
+            .then(checkStatus)
+            .then(function (responseText) {
+                let json = JSON.parse(responseText);
 
+                document.getElementById("eve" + target + "Priv").innerHTML =
+                    json["D"] + " " + json["N"];
+
+                return data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     /**
@@ -457,6 +513,46 @@
      * the corresponding private key is known.
      */
     function eveCrack() {
+
+        let keyBob = document.getElementById("eveBPriv").innerHTML.split(" ");
+        let keyAlice = document.getElementById("eveAPriv").innerHTML.split(" ");
+
+        let form = /^[0-9 ]+$/;
+        for (let i = 0; i < messageList.names.length; i++) {
+            let name = messageList.names[i];
+            let message = messageList.messages[i];
+
+            // if the input isn't a number, don't bother decrypting
+            if (!form.exec(message)) {
+                messageList.messages[i] = message;
+                continue;
+            }
+
+            if (name === "Bob") {
+                if (bobKey) {
+                    getMessage(message, keyBob[1], keyBob[0], "Bob", i);
+                } else {
+                    messageList.messages[i] = message;
+                }
+            } else if (name === "Alice") {
+                if (aliceKey) {
+                    getMessage(message, keyAlice[1], keyAlice[0], "Alice", i);
+                } else {
+                    messageList.messages[i] = message;
+                }
+            } else {
+                messageList.messages[i] = message;
+            }
+        }
+    }
+
+    /**
+     * addAllToTables
+     * Take all messages in Eve's intercepted messages list and add them to
+     * the table.
+     */
+    function addAllToTables() {
+
         let table = document.getElementById("eveTable");
 
         // reset eve's table
@@ -470,30 +566,51 @@
         tr.appendChild(th2);
         table.appendChild(tr);
 
-        let form = /^[0-9]+$/;
         for (let i = 0; i < messageList.names.length; i++) {
-            let name = messageList.names[i];
-            let message = messageList.messages[i];
-
-            console.log(name + " " + message);
-
-            // if the input isn't a number, don't bother decrypting
-            if (!form.exec(message)) {
-                addToTable(name, message);
-                continue;
-            }
-
-            if (name === "Bob") {
-                // TODO: Retrieve Bob's private key from server
-                // TODO: If value not empty, decrypt message
-            } else if (name === "Alice") {
-                // TODO: Retrieve Alice's private key from server
-                // TODO: If value not empty, decrypt message
-            }
-            messageList.messages[i] = message;
-            addToTable(name, message);
+            addToTable(messageList.names[i], messageList.messages[i]);
         }
+    }
 
+    /**
+     * getMessage
+     * given an encrypted message and the decryption key, contact the server
+     * to decrypt the message.
+     * @param msg the message to read
+     * @param n the modulus of the decryption key
+     * @param d the exponent of the decryption key
+     * @param name the target of the message
+     * @param i the index of the message list where the message is found
+     */
+    function getMessage(msg, n, d, name, i) {
+
+        const data = {
+            request: "read",
+            message: msg,
+            n: n,
+            d: d
+        };
+
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        let url = "http://localhost:3000";
+
+        fetch(url, fetchOptions)
+            .then(checkStatus)
+            .then(function (responseText) {
+                let json = JSON.parse(responseText);
+                messageList.messages[i] = json["message"];
+                addAllToTables();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
 })();
